@@ -6,34 +6,28 @@
   <script src="app.js"></script>
    <script src="controllers/StudentsController.js"></script>
    <script src="controllers/FieldTripsController.js"></script>
-   <script src="services/StudentsFactory.js"></script>
+   <script src="controllers/PlacesController.js"></script>
+   <script src="services/QuestionsFactory.js"></script>
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
   <div class="container">
+    <center><h1 class="page-header">Survey Bot</h1></center>
     <div  ng-controller="StudentsCtrl">
       <div class="row">
-        <center><h1 class="page-header">Survey This!!</h1></center>
+
         <div class="col-md-6">
           <h4>Name your favorite athlete:</h4>
-          <form ng-submit="StudentsFactory.addStudent()" class="form-inline" role="form">
+          <form ng-submit="QuestionsFactory.addStudent()" class="form-inline" role="form">
             <div class="form-group">
-              <input type="text" ng-model="StudentsFactory.studentName" class="form-control" id="student-name" placeholder="Enter name">
+              <input type="text" ng-model="QuestionsFactory.studentName" class="form-control" id="student-name" placeholder="Enter name">
             </div>
             <button type="submit" class="btn btn-info btn-sm">Submit</button>
           </form>
         </div>
-        <div class="col-md-6">
-          <h2 ng-show="students.length && filtered.length"></h2>
-          <h2 ng-show="students.length && !filtered.length">Nothing</h2>
-          <ul>
-            <li ng-repeat="item in filtered = (students | filter:query)">
-              your answer has been successfully submitted. <strong>Thank you!</strong>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
+
     <div class="row" ng-controller="FieldTripsCtrl">
       <div class="col-md-6" ng-show="studentsWithoutPermission.length">
         <h3>Answers for athlete</h3>
@@ -44,7 +38,7 @@
         </ul>
       </div>
       <div class="col-md-6" ng-show="studentsWithPermission.length">
-        <h3>Favorite Athletes</h3>
+        <h3>Athletes Poll Result</h3>
         <ul>
           <li ng-repeat="item in studentsWithPermission = (students | filter:{permissionSlip: true})">
             {{item.name}}
@@ -52,6 +46,41 @@
         </ul>
       </div>
     </div>
+
+
+
+    <div ng-controller="PlacesCtrl">
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Name your favorite place:</h4>
+          <form ng-submit="QuestionsFactory.addPlace()" class="form-inline" role="form">
+            <div class="form-group">
+              <input type="text" ng-model="QuestionsFactory.placeName" class="form-control" id="place-name" placeholder="Enter name">
+            </div>
+            <button type="submit" class="btn btn-info btn-sm">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-controller="FieldTripsCtrl">
+      <div class="col-md-6" ng-show="placesWithoutPermission.length">
+        <h3>Answers for places</h3>
+        <ul>
+          <li ng-repeat="item in placesWithoutPermission = (places | filter:{permissionSlip: false})">
+            ...<a ng-click="addPlaceWithPermissionSlip(item)"> - show answers</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-6" ng-show="PlacesWithPermission.length">
+        <h3>Athletes Poll Result</h3>
+        <ul>
+          <li ng-repeat="item in placesWithPermission = (places | filter:{permissionSlip: true})">
+            {{item.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </body>
 </html>
