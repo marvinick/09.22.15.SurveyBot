@@ -33,7 +33,7 @@
         <h3>Answers for athlete</h3>
         <ul>
           <li ng-repeat="item in studentsWithoutPermission = (students | filter:{permissionSlip: false})">
-            ...<a ng-click="addStudentWithPermissionSlip(item)"> - show answers</a>
+            Thank you<a ng-click="addStudentWithPermissionSlip(item)"> - show answer</a>
           </li>
         </ul>
       </div>
@@ -46,7 +46,6 @@
         </ul>
       </div>
     </div>
-
 
 
     <div ng-controller="PlacesCtrl">
@@ -67,12 +66,13 @@
         <h3>Answers for places</h3>
         <ul>
           <li ng-repeat="item in placesWithoutPermission = (places | filter:{permissionSlip: false})">
-            ...<a ng-click="addPlaceWithPermissionSlip(item)"> - show answers</a>
+            Thank you<a ng-click="addPlaceWithPermissionSlip(item)"> - show answer</a>
           </li>
         </ul>
       </div>
-      <div class="col-md-6" ng-show="PlacesWithPermission.length">
-        <h3>Athletes Poll Result</h3>
+
+      <div class="col-md-6" ng-show="placesWithPermission.length">
+        <h3>Places Poll Result</h3>
         <ul>
           <li ng-repeat="item in placesWithPermission = (places | filter:{permissionSlip: true})">
             {{item.name}}
