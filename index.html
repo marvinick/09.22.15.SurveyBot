@@ -1,7 +1,7 @@
  <!doctype html>
  <html ng-app="studentRoster">
  <head>
-  <title>Student App</title>
+  <title>SurveyBot</title>
   <script src="lib/angular.js"></script>
   <script src="app.js"></script>
    <script src="controllers/StudentsController.js"></script>
@@ -14,7 +14,7 @@
     <div  ng-controller="StudentsCtrl">
       <div class="row" ng-show="students.length">
         <div class="col-md-12">
-          <h4>Search Students</h4>
+          <h4>Search</h4>
           <form class="form-inline" role="form">
             <div class="form-group">
               <input ng-model="query" type="text" class="form-control" id="student-name" placeholder="Search">
@@ -24,24 +24,16 @@
       </div>
       <div class="row">
         <div class="col-md-6">
-          <h2 ng-show="students.length && filtered.length">Student List</h2>
-          <h2 ng-show="students.length && !filtered.length">No Matches</h2>
+          <h2 ng-show="students.length && filtered.length">Thank You</h2>
+          <h2 ng-show="students.length && !filtered.length">Nothing</h2>
           <ul>
             <li ng-repeat="item in filtered = (students | filter:query)">
-              <span ng-click="editing = true" ng-hide="editing">
-                {{item.name}} <a ng-click="StudentsFactory.deleteStudent(item)">Delete</a>
-              </span>
-              <span class="form-group" ng-show="editing" ng-submit="editing = false">
-                <form class="form-inline" role="form">
-                  <input type="text" class="form-control input-sm" ng-model="item.name" placeholder="Name" required/>
-                  <button class="btn btn-danger btn-sm" type="submit">Save</button>
-                </form>
-              </span>
+
             </li>
           </ul>
         </div>
         <div class="col-md-6">
-          <h2>New Student</h2>
+          <h2>favorite athlete:</h2>
           <form ng-submit="StudentsFactory.addStudent()" class="form-inline" role="form">
             <div class="form-group">
               <input type="text" ng-model="StudentsFactory.studentName" class="form-control" id="student-name" placeholder="Enter name">
@@ -53,15 +45,15 @@
     </div>
     <div class="row" ng-controller="FieldTripsCtrl">
       <div class="col-md-6" ng-show="studentsWithoutPermission.length">
-        <h3>Without Permission Slips</h3>
+        <h3>Answers for athlete</h3>
         <ul>
           <li ng-repeat="item in studentsWithoutPermission = (students | filter:{permissionSlip: false})">
-            {{item.name}} <a ng-click="addStudentWithPermissionSlip(item)"> - received permission slip -</a>
+            ...<a ng-click="addStudentWithPermissionSlip(item)"> - show answers</a>
           </li>
         </ul>
       </div>
       <div class="col-md-6" ng-show="studentsWithPermission.length">
-        <h3>With Permission Slips</h3>
+        <h3>Favorite Athletes</h3>
         <ul>
           <li ng-repeat="item in studentsWithPermission = (students | filter:{permissionSlip: true})">
             {{item.name}}
